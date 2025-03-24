@@ -153,17 +153,6 @@ dmypy.json
 .DS_Store
 
 
-# Local dirs
-/data/rank_data.csv
-/data/test_data_with_predictions.csv
-/data/train_data_with_predictions.csv
-/"http:
-/src/catboost_info
-/.dvc/
-!/data/search_words_top100.txt
-/catboost_info
-
-
 # Images
 *.png
 *.jpg
@@ -178,5 +167,5 @@ dmypy.json
 *.cbm
 
 # MyFolders
-/app/back/saved_audio
-/app/back/saved_video
+/mediaModeration/app/back/saved_video
+/mediaModeration/app/back/saved_audio
