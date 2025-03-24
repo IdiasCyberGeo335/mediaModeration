@@ -178,5 +178,5 @@ dmypy.json
 *.cbm
 
 # MyFolders
-/back/saved_audio
-/back/saved_video
+/app/back/saved_audio
+/app/back/saved_video
