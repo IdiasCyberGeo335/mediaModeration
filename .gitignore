@@ -61,7 +61,8 @@ coverage.xml
 *.log
 local_settings.py
 db.sqlite3
-db.sqlite3-journal
+db.sqlite3-journaltorch.cuda.empty_cache()
+torch.cuda.reset_peak_memory_stats()
 
 # Flask stuff:
 instance/
@@ -139,16 +140,8 @@ dmypy.json
 /videos
 /audios
 /test_dataset
-/bin_models
-/new_models
-/config.yaml
-
-# DVC
-!/data/*.dvc
-.dvc/config.local
-
-
-
+/bin_modelstorch.cuda.empty_cache()
+torch.cuda.reset_peak_memory_stats()
 # macOS
 .DS_Store
 
@@ -167,5 +160,6 @@ dmypy.json
 *.cbm
 
 # MyFolders
-/mediaModeration/app/back/saved_video
-/mediaModeration/app/back/saved_audio
+/home/retro0/cyberspace/projects/full-stack/diplom-2025/mediaModeration/app/back/saved_video
+/home/retro0/cyberspace/projects/full-stack/diplom-2025/mediaModeration/app/back/saved_audio
+/home/retro0/cyberspace/projects/full-stack/diplom-2025/mediaModeration/app/back/models
