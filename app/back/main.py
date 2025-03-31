@@ -12,6 +12,7 @@ app = FastAPI()
     - UPLOAD_DIR -> директория для загрузки видео 
     - MODEL_DIR -> путь к моделям относительно корневой директории
 """
+
 BASE_DIR = Path(__file__).resolve().parent
 
 UPLOAD_DIR = BASE_DIR / "saved_video"
@@ -64,4 +65,6 @@ async def contentFromVideo(videoFile: UploadFile = File(...)):
         raise HTTPException(status_code=500, detail=f"Failed to save file {e}")
     
 
-
+@app.post("/moderation-contetnt/")
+async def contentModerationFromVideo():
+    pass

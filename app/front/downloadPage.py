@@ -8,7 +8,7 @@ import base64
 """
 
 URLposting = "http://localhost:8000/sending-content/"
-URLgeting = "http://localhost:8000/"
+URLprocessing = "http://localhost:8000/"
 
 
 
