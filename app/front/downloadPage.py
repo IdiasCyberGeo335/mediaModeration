@@ -8,7 +8,7 @@ import base64
 """
 
 URLposting = "http://localhost:8000/sending-content/"
-URLprocessing = "http://localhost:8000/"
+URLprocessing = "http://localhost:8000/moderation-contetnt/"
 
 
 
@@ -87,4 +87,5 @@ if upload_file is not None:
 
 # Кнопка "Обработать" (пока без функционала)
 if st.button("Обработать"):
-    st.info("Кнопка 'Обработать' пока не реализована.")
+    st.info("Видеофайл отправлен на бэкэнд!")
+    response = requests.post(URLprocessing)

@@ -1,8 +1,17 @@
 import os
+import asyncio
+import json
 from pathlib import Path
 from fastapi import FastAPI, File, UploadFile, HTTPException
 from moviepy import VideoFileClip
 from loguru import logger
+
+from scripts.textDetector import textExtraction
+from scripts.ocrDetector import ocrExtraction
+from scripts.yoloDetector import bboxExtraction
+from scripts.profanityDetector import profanityDetection
+
+from scripts.preprocessing import preprocessingText
 
 app = FastAPI()
 
@@ -67,4 +76,50 @@ async def contentFromVideo(videoFile: UploadFile = File(...)):
 
 @app.post("/moderation-contetnt/")
 async def contentModerationFromVideo():
-    pass
+    logger.info(f"Searching files...")
+
+    videoFile = list(UPLOAD_DIR.glob("*"))
+    audioFile = list(AUDIO_DIR.glob("*"))
+
+    videoPath = videoFile[0]
+    audioPath = audioFile[0]
+
+    logger.info(f"videoFile Detected: {videoPath}")
+    logger.info(f"audioFile Detected: {audioPath}")
+
+    
+    logger.info(f"Launching detectors...")
+
+    """
+    Отработка модуля 1:
+        -Извлечение текста из аудио -> детекция запрещённых слов
+    """
+    logger.info(f"Launching TextExtractor...")
+    taskTextExtractor = asyncio.create_task(textExtraction(str(audioPath)))
+
+    await asyncio.sleep(6)
+    taskTextExtractor = await taskTextExtractor
+    logger.info(f"{type(taskTextExtractor)}")
+    logger.info(f"{taskTextExtractor}")
+    logger.info(f"TextExtractor: {taskTextExtractor['textExtraction']}")
+
+    taskTextExtractor['textExtraction'] = preprocessingText(taskTextExtractor['textExtraction'])
+    logger.info(f"CURRENT taskPreprocessingText: {taskTextExtractor}")
+    taskProfanityDetector = (profanityDetection(str(taskTextExtractor['textExtraction'])))
+    taskTextExtractor = taskTextExtractor | taskProfanityDetector
+    logger.info(f"taskTextExtractor: {taskTextExtractor}")
+
+
+
+
+
+
+
+
+
+
+    
+    #logger.info(f"Launching taskAudio...")
+    #taskOCR = asyncio.create_task(ocrExtraction(str(videoPath)))
+    #logger.info(f"Launching taskAudio...")
+    #taskVideo = asyncio.create_task(bboxExtraction(str(videoPath)))
