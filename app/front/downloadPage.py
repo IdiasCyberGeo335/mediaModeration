@@ -2,17 +2,9 @@ import streamlit as st
 import requests
 import base64
 
-
-"""
-Инициализация ручек
-"""
-
 URLposting = "http://localhost:8000/sending-content/"
 URLprocessing = "http://localhost:8000/moderation-contetnt/"
 
-
-
-#st.set_page_config(page_title="Download Page", layout="centered")
 
 # Инжектируем CSS для стилизации основного контейнера приложения и виджетов
 st.markdown("""
@@ -62,7 +54,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Заголовок страницы
-st.markdown('<h1 class="download-header">Download Page</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="download-header">Moderation System: MILFS</h1>', unsafe_allow_html=True)
 
 # Загрузчик видео
 upload_file = st.file_uploader("MILFS", type=["mp4", "mov", "avi"])
@@ -89,3 +81,13 @@ if upload_file is not None:
 if st.button("Обработать"):
     st.info("Видеофайл отправлен на бэкэнд!")
     response = requests.post(URLprocessing)
+    if response.status_code == 200:
+        result = response.json()
+        if result.get("status") is True:
+            table_data = result.get("data")
+            st.success("Обработка завершена!")
+            st.table(table_data)
+        else:
+            st.error("Ошибка обработки: " + result.get("error", "Неизвестная ошибка"))
+    else:
+        st.error("Ошибка запроса к бэкэнду!")

@@ -109,6 +109,29 @@ async def contentModerationFromVideo():
     taskTextExtractor = taskTextExtractor | taskProfanityDetector
     logger.info(f"taskTextExtractor: {taskTextExtractor}")
 
+    if taskTextExtractor.get("status") is True:
+        tableData = [
+            {
+                "module": "Audio",
+                "status": taskTextExtractor.get("status"),
+                "result": taskTextExtractor.get("textExtraction")
+                #"result": "Profanity detected"
+            },
+            {
+                "module": "OCR",
+                "status": False,
+                "result": "Forbidden content didnt find"
+            },
+            {
+                "module": "Yolo",
+                "status": False,
+                "result": "Forbidden content didnt find"
+            }
+        ]
+        return {"status": True, "data": tableData}
+    else:
+        return {"status": False, "error": "ERROR"}
+
 
 
 
