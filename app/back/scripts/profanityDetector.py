@@ -15,7 +15,8 @@ logger.info(f"Init DEVICE for BERT: {DEVICE}")
 
 
 
-checkpoint = torch.load(BERT_DIR, map_location=DEVICE)
+checkpoint = torch.load(BERT_DIR, map_location=DEVICE, weights_only=False)
+
 model = AutoModelForSequenceClassification.from_config(checkpoint['model_config'])
 model.load_state_dict(checkpoint["model_state_dict"])
 model.to(DEVICE)

@@ -14,7 +14,7 @@ logger.info(f"Init DEVICE for Whisper: {DEVICE}")
 async def textExtraction(audioPath: str):
     logger.info(f"textExtraction -> audioPath: {audioPath}")
     logger.info("Init whisper...")
-    whisperLaunch = torch.load(WHISPER_DIR, map_location=DEVICE)
+    whisperLaunch = torch.load(WHISPER_DIR, map_location=DEVICE, weights_only=False)
     logger.info("Whisper transcription...")
     
     """Extracting logic:"""

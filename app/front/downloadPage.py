@@ -1,9 +1,10 @@
 import streamlit as st
+import streamlit.components.v1 as components
 import requests
 import base64
 
 URLposting = "http://localhost:8000/sending-content/"
-URLprocessing = "http://localhost:8000/moderation-contetnt/"
+URLprocessing = "http://localhost:8000/moderation-content/"
 
 
 # Инжектируем CSS для стилизации основного контейнера приложения и виджетов
@@ -54,7 +55,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Заголовок страницы
-st.markdown('<h1 class="download-header">Moderation System: MILFS</h1>', unsafe_allow_html=True)
+st.markdown('<h1 class="download-header">Moderation System: YAPPY</h1>', unsafe_allow_html=True)
 
 # Загрузчик видео
 upload_file = st.file_uploader("MILFS", type=["mp4", "mov", "avi"])
@@ -91,3 +92,24 @@ if st.button("Обработать"):
             st.error("Ошибка обработки: " + result.get("error", "Неизвестная ошибка"))
     else:
         st.error("Ошибка запроса к бэкэнду!")
+
+st.markdown(
+    """
+    <div style="text-align: center; margin-top: 30px;">
+        <a href="http://localhost:8505/?page=historyPage" target="_self">
+            <button style="
+                background-color: #6441a5;
+                color: #fff;
+                padding: 12px 25px;
+                font-size: 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            ">
+                Перейти в историю модерации
+            </button>
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
